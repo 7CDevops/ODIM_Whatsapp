@@ -1,0 +1,708 @@
+#:import C kivy.utils.get_color_from_hex
+#:import NoTransition kivy.uix.screenmanager.NoTransition
+<MainScreen>:
+    orientation: 'vertical'
+    resizable: 0
+    ActionBar:
+        ActionView:
+            use_separator: True
+            ActionPrevious:
+                title: ''
+                with_previous: False
+                app_icon: ''
+                app_icon_width: 0
+                app_icon_height: 0
+                size_hint_x: None
+                width: len(self.title) * 10
+            ActionButton:
+                text: 'Envoi'
+                on_release:  app.root.ids.manager.current = 'login'
+            ActionButton:
+                text: 'Rapport'
+                on_press: root.updateGraphic()
+                on_release:  app.root.ids.manager.current = 'rapport'
+            ActionButton:
+                text: 'Planification'
+                on_release:  app.root.ids.manager.current = 'programmation'
+            ActionButton:
+                text: 'Génération'
+                on_release:  app.root.ids.manager.current = 'generationContact'
+            ActionButton:
+                text: 'Détection'
+                on_release:  app.root.ids.manager.current = 'detectionSocialNetwork'
+            ActionButton:
+                text: 'Retweet'
+                on_release:  app.root.ids.manager.current = 'retweetLike'
+    ScreenManagement:
+        id:manager
+        transition: NoTransition()
+
+
+<LoginScreen>:
+    Image:
+        id: my_image
+        source: root.image_source
+        size: root.width, root.height
+        allow_stretch: True
+        keep_ratio: False
+    GridLayout:
+        rows: 4
+        size:root.width, root.height-30
+        padding: 10
+        GridLayout:
+            canvas.before:
+                Color:
+                    rgba: 0, 0, 1, 0.3
+                RoundedRectangle:
+                    pos: self.pos
+                    size: self.size
+                    radius:[15]
+            cols:2
+            size_hint_y:None
+            height:root.height/2
+            Label:
+                id:labelDelai
+                text:"Délai entre les messages"
+                font_size:25
+            BoxLayout:
+                BoxLayout:
+                    size_hint_x: 5
+                BoxLayout:
+                    size_hint_x: 50
+                    RoundedInput:
+                        id:inputDelai
+                BoxLayout:
+                    size_hint_x: 5
+            Label:
+                text:"Envoi par paquet"
+                font_size:25
+            MDFloatLayout:
+                MDSwitch:
+                    id:cbByPacket
+                    pos_hint: {'center_x': .5, 'center_y': .5}
+            Label:
+                id:labelVolume
+                text:"Volume"
+                font_size:25
+            BoxLayout:
+                BoxLayout:
+                    size_hint_x: 5
+                BoxLayout:
+                    size_hint_x: 50
+                    RoundedInput:
+                        id:inputVolume
+                        disabled: not cbByPacket.active
+                BoxLayout:
+                    size_hint_x: 5
+            Label:
+                id:labelPause
+                text:"Pause"
+                font_size:25
+            BoxLayout:
+                BoxLayout:
+                    size_hint_x: 5
+                BoxLayout:
+                    size_hint_x: 50
+                    RoundedInput:
+                        id:inputPause
+                        disabled: not cbByPacket.active
+                BoxLayout:
+                    size_hint_x: 5
+            Label:
+                text:"Délai aléatoire"
+                font_size:25
+            MDFloatLayout:
+                MDSwitch:
+                    id:cbRandomDelay
+                    pos_hint: {'center_x': .5, 'center_y': .5}
+
+            Label:
+                id:labelDelaiMin
+                text:"Délai minimum"
+                font_size:25
+            BoxLayout:
+                BoxLayout:
+                    size_hint_x: 5
+                BoxLayout:
+                    size_hint_x: 50
+                    RoundedInput:
+                        id:inputDelaiMin
+                        disabled: not cbRandomDelay.active
+                BoxLayout:
+                    size_hint_x: 5
+            Label:
+                id:labelDelaiMax
+                text:"Délai maximum"
+                font_size:25
+            BoxLayout:
+                BoxLayout:
+                    size_hint_x: 5
+                BoxLayout:
+                    size_hint_x: 50
+                    RoundedInput:
+                        id:inputDelaiMax
+                        disabled: not cbRandomDelay.active
+                BoxLayout:
+                    size_hint_x: 5
+            Label:
+                text:"Rester connecté à la session"
+                font_size:25
+            MDFloatLayout:
+                MDSwitch:
+                    id:cbStayConnected
+                    pos_hint: {'center_x': .5, 'center_y': .5}
+
+            Label:
+                id:label
+                text:"Session utilisateur"
+                font_size:25
+            BoxLayout:
+                BoxLayout:
+                    size_hint_x: 5
+                BoxLayout:
+                    size_hint_x: 50
+                    RoundedInput:
+                        id:inputSession
+                        disabled: not cbStayConnected.active
+                        padding_x: (self.width - self.text_width) / 11
+                        font_size:12
+                BoxLayout:
+                    size_hint_x: 5
+            Label:
+                text:"Passer les contacts inconnus"
+                font_size:25
+            MDFloatLayout:
+                MDSwitch:
+                    id:cbSkipContact
+                    pos_hint: {'center_x': .5, 'center_y': .5}
+            Label:
+                text:"Chemin de ressource relatif "
+                font_size:25
+            MDFloatLayout:
+                MDSwitch:
+                    id: cbRelativeCheckBox
+                    pos_hint: {'center_x': .5, 'center_y': .5}
+            Label:
+                text:"Structure message texte aléatoire"
+                font_size:25
+            MDFloatLayout:
+                MDSwitch:
+                    id: cbRandomTextStructureCheckBox
+                    pos_hint: {'center_x': .5, 'center_y': .5}
+
+        MDFloatLayout:
+            cols:1
+            padding: 20
+            size_hint_y:None
+            height: 130
+            canvas.before:
+                Color:
+                    rgba: (15/255,25/255,46/255,0.7)
+                RoundedRectangle:
+                    pos: self.pos
+                    size: (self.width,self.height-10)
+                    radius:[15]
+            Label:
+                text: "Fichier importé :"
+                pos_hint: {'center_x': .5, 'center_y': .8}
+            Label:
+                id:fileImportedLabel
+                text: ""
+                pos_hint: {'center_x': .5, 'center_y': .6}
+            MDProgressBar:
+                id:botProgressBar
+                size_hint_y:None
+                height:dp(15)
+                size_hint_x:None
+                width:dp(950)
+                pos_hint: {'center_x': .5, 'center_y': .3}
+                min:0
+                max:1
+                type: "determinate"
+                color: app.theme_cls.accent_color
+            Label:
+                id:progressBarLabel
+                pos_hint: {'center_x': .5, 'center_y': .1}
+
+
+        GridLayout:
+            cols:3
+            padding:20
+            RoundedButton:
+                id:buttonImport
+                text: "Exporter les contacts d'une session"
+                on_release: root.extractContacts()
+            GridLayout:
+                rows:3
+                spacing:20
+                Label:
+                    id:labelSuccessCount
+                    font_size:30
+                    color:C('#99ff99')
+                Label:
+                    id:labelOtherCount
+                    font_size:30
+                    color:C('#ffa85a')
+                Label:
+                    id:labelFailedCount
+                    font_size:30
+                    color:C('#ff6666')
+            RoundedButton:
+                on_release:root.saveConfiguration()
+                text:'Sauvegarder la configuration'
+
+
+        GridLayout:
+            cols:3
+            padding:20
+            RoundedButton:
+                id:buttonImport
+                text: "Importer un fichier"
+                on_release: root.openExplorer()
+            GridLayout:
+                cols:2
+                GridLayout:
+                    rows:2
+                    canvas.before:
+                        Color:
+                            rgba: 0, 1, 0, 0.6
+                        RoundedRectangle:
+                            pos: self.pos
+                            size: self.size
+                            radius:[15]
+                    Label:
+                        text: "WhatsApp"
+                    Check:
+                        id: cbWhatsApp
+                        active: True
+                GridLayout:
+                    rows:2
+                    canvas.before:
+                        Color:
+                            rgba: 0, 0, 1, 0.3
+                        RoundedRectangle:
+                            pos: self.pos
+                            size: self.size
+                            radius:[15]
+                    Label:
+                        text: "Telegram"
+                    Check:
+                        id: cbTelegram
+            RoundedButton:
+                id:buttonLaunch
+                text: "Lancer le BOT"
+                on_release: root.runBOT()
+                disabled: not cbWhatsApp.active and not cbTelegram.active
+
+# Ecran secondaire pour mettre en page un rapport suite à un envoi
+
+<RapportScreen>:
+    Image:
+        id: my_image
+        source: root.image_source
+        size: root.width, root.height
+        allow_stretch: True
+        keep_ratio: False
+    GridLayout:
+        # rows:3
+        rows:2
+        padding:20
+        # BoxLayout:
+            # id:dataBox
+            # size: root.width, root.height
+        BoxLayout:
+            id:chartBox
+            size_hint_y:None
+            height:root.height/1.5
+        FloatLayout:
+            padding: 10
+            RoundedButton:
+                id: exportButton
+                text:'Exporter'
+                on_release:root.exportRapportToCSV()
+                size_hint_y:None
+                height:90
+                font_size:50
+                pos_hint: {'center_x': .5, 'center_y': .2}
+
+<ProgrammationScreen>
+    Image:
+        id: my_image
+        source: root.image_source
+        size: root.width, root.height
+        allow_stretch: True
+        keep_ratio: False
+    GridLayout:
+        rows:5
+        padding: 20
+        Label:
+            text:'Planification'
+            size_hint_y:None
+            height:100
+            font_size:60
+            underline: True
+        GridLayout:
+            cols:3
+            color: 0, 0, 1, 0.3
+            id:DateTimeGrid
+            canvas.before:
+                Color:
+                    rgba: self.color
+                RoundedRectangle:
+                    pos: self.pos
+                    size: self.width, self.height-10
+                    radius:[15]
+            Label:
+                text:'GDH :'
+                font_size:40
+                underline: True
+            GridLayout:
+                rows:2
+                padding:25
+                spacing:10
+                MDIconButton:
+                    icon:'calendar'
+                    size_hint : 1, 1
+                    on_press: root.show_date_picker()
+                    canvas.before:
+                        Color:
+                            rgba: 0, 1, 1, 0.3
+                        RoundedRectangle:
+                            pos: self.pos
+                            size: self.width, self.height
+                            radius:[15]
+                MDIconButton:
+                    icon:'clock'
+                    size_hint : 1, 1
+                    on_press: root.show_time_picker()
+                    canvas.before:
+                        Color:
+                            rgba: 0, 1, 1, 0.3
+                        RoundedRectangle:
+                            pos: self.pos
+                            size: self.width, self.height
+                            radius:[15]
+            GridLayout:
+                rows:2
+                padding:30
+                spacing:20
+                RoundedInput:
+                    id:inputDate
+                    size_hint_x:None
+                    width: 250
+                RoundedInput:
+                    id:inputTime
+                    size_hint_x:None
+                    width: 250
+        GridLayout:
+            id:loginGrid
+            cols:2
+        GridLayout:
+            cols:2
+            id:scriptGrid
+            color: 0, 0, 1, 0.3
+            canvas.before:
+                Color:
+                    rgba: self.color
+                RoundedRectangle:
+                    pos: self.pos
+                    size: self.width, self.height-10
+                    radius:[15]
+            FloatLayout:
+                Label:
+                    text:'Nom de la programmation :'
+                    font_size:30
+                    pos_hint: {'center_x': .5, 'center_y': .5}
+                Label:
+                    text:'Fichier d\'envoi :'
+                    font_size:30
+                    pos_hint: {'center_x': .5, 'center_y': .25}
+            FloatLayout:
+                RoundedInput:
+                    id:inputProgName
+                    size_hint_x:None
+                    width: 425
+                    pos_hint: {'center_x': .5, 'center_y': .5}
+                MDIconButton:
+                    icon:'folder-search'
+                    size_hint : 0.15, 0.22
+                    on_press: root.open_explorer()
+                    pos_hint: {'center_x': .10, 'center_y': .25}
+                    canvas.before:
+                        Color:
+                            rgba: 0, 1, 1, 0.3
+                        RoundedRectangle:
+                            pos: self.pos
+                            size: self.width, self.height
+                            radius:[15]
+                RoundedInput:
+                    id:inputFile
+                    size_hint_x:None
+                    width: 350
+                    pos_hint: {'center_x': .58, 'center_y': .25}
+        RoundedButton:
+            text:'Valider'
+            size_hint_y:None
+            height:90
+            font_size:50
+            on_release:root.triggerProgrammation()
+
+<GenerateContactScreen>
+    Image:
+        id: my_image
+        source: root.image_source
+        size: root.width, root.height
+        allow_stretch: True
+        keep_ratio: False
+    GridLayout:
+        rows:4
+        padding:20
+        Label:
+            text:'Génération de contacts VCF'
+            size_hint_y:None
+            height:root.height/6
+            font_size:60
+            underline: True
+        FloatLayout:
+            Label:
+                text:'Importer un fichier de numéros :'
+                font_size:30
+                pos_hint: {'center_x': .22, 'center_y': .90}
+            MDIconButton:
+                icon:'folder-search'
+                size_hint : 0.15, 0.07
+                on_press: root.open_explorer()
+                pos_hint: {'center_x': .52, 'center_y': .90}
+                canvas.before:
+                    Color:
+                        rgba: 0, 1, 1, 0.3
+                    RoundedRectangle:
+                        pos: self.pos
+                        size: self.width, self.height
+                        radius:[15]
+            RoundedInput:
+                id:inputSourceFile
+                size_hint_x:None
+                width: 350
+                pos_hint: {'center_x': .80, 'center_y': .90}
+        RoundedButton:
+            size_hint_y:None
+            height:90
+            font_size:50
+            text:'Générer'
+            on_release:root.generateFile()
+
+<DetectionScreen>
+    Image:
+        id: my_image
+        source: root.image_source
+        size: root.width, root.height
+        allow_stretch: True
+        keep_ratio: False
+    GridLayout:
+        rows:4
+        padding:20
+        Label:
+            text:'Détection de réseaux sociaux'
+            size_hint_y:None
+            height:root.height/6
+            font_size:60
+            underline: True
+        FloatLayout:
+            size_hint : 0.25, 0.25
+            Label:
+                text:'Importer un fichier de numéros :'
+                font_size:30
+                pos_hint: {'center_x': .22, 'center_y': .90}
+            MDIconButton:
+                icon:'folder-search'
+                size_hint : 0.15, 0.35
+                on_press: root.open_explorer()
+                pos_hint: {'center_x': .52, 'center_y': .90}
+                canvas.before:
+                    Color:
+                        rgba: 0, 1, 1, 0.3
+                    RoundedRectangle:
+                        pos: self.pos
+                        size: self.width, self.height
+                        radius:[15]
+            RoundedInput:
+                id:inputFile
+                size_hint_x:None
+                width: 350
+                pos_hint: {'center_x': .80, 'center_y': .90}
+        BoxLayout:
+            id:graphSocialNetwork
+            height:root.height/2
+        RoundedButton:
+            size_hint_y:None
+            height:90
+            font_size:50
+            text:'Détecter'
+            on_release:root.detectFile()
+
+<RetweetScreen>
+    Image:
+        id: my_image
+        source: root.image_source
+        size: root.width, root.height
+        allow_stretch: True
+        keep_ratio: False
+    GridLayout:
+        rows:4
+        padding:20
+        Label:
+            text:'Retweet et Like'
+            size_hint_y:None
+            height:root.height/6
+            font_size:60
+            underline: True
+        FloatLayout:
+            size_hint : 0.25, 0.25
+            Label:
+                text:'Importer les tweeters :'
+                font_size:30
+                pos_hint: {'center_x': .22, 'center_y': .90}
+            MDIconButton:
+                icon:'folder-search'
+                size_hint : 0.13, 0.35
+                on_press: root.open_explorer_tweet()
+                pos_hint: {'center_x': .52, 'center_y': .90}
+                canvas.before:
+                    Color:
+                        rgba: 0, 1, 1, 0.3
+                    RoundedRectangle:
+                        pos: self.pos
+                        size: self.width, self.height
+                        radius:[15]
+            RoundedInput:
+                id:inputFileTweet
+                size_hint_x:None
+                width: 350
+                pos_hint: {'center_x': .80, 'center_y': .90}
+            Label:
+                text:'Importer les retweeters :'
+                font_size:30
+                pos_hint: {'center_x': .22, 'center_y': .45}
+            MDIconButton:
+                icon:'folder-search'
+                size_hint : 0.13, 0.35
+                on_press: root.open_explorer_retweet()
+                pos_hint: {'center_x': .52, 'center_y': .45}
+                canvas.before:
+                    Color:
+                        rgba: 0, 1, 1, 0.3
+                    RoundedRectangle:
+                        pos: self.pos
+                        size: self.width, self.height
+                        radius:[15]
+            RoundedInput:
+                id:inputFileRetweet
+                size_hint_x:None
+                width: 350
+                pos_hint: {'center_x': .80, 'center_y': .45}
+            Label:
+                text:'Date OP :'
+                font_size:30
+                pos_hint: {'center_x': .22, 'center_y': .0}
+            MDIconButton:
+                icon:'calendar'
+                size_hint : 0.13, 0.35
+                on_press: root.show_date_picker()
+                pos_hint: {'center_x': .52, 'center_y': .0}
+                canvas.before:
+                    Color:
+                        rgba: 0, 1, 1, 0.3
+                    RoundedRectangle:
+                        pos: self.pos
+                        size: self.width, self.height
+                        radius:[15]
+            RoundedInput:
+                text:date.today().strftime('%Y-%m-%d')
+                id:inputDateRetweet
+                size_hint_x:None
+                width: 350
+                pos_hint: {'center_x': .80, 'center_y': .0}
+        BoxLayout:
+            id:graphRetweetLike
+            height:root.height/2
+        RoundedButton:
+            size_hint_y:None
+            height:90
+            font_size:50
+            text:'Retweeter Liker'
+            on_release:root.retweetAndLike()
+
+# Custom composant
+<Check@MDCheckbox>:
+    group: 'group'
+    size: dp(48), dp(48)
+
+<RoundedButton@Button>:
+    background_color: 0,0,0,0  # the last zero is the critical on, make invisible
+    on_press: self.background_color = C('#0c99c8')
+    on_release: self.background_color = 0,0,0,0
+    canvas.before:
+        Color:
+            rgba: C('#0f192e')
+        RoundedRectangle:
+            pos: self.pos
+            size: self.size
+            radius: [15]
+
+
+
+<RoundedInput@TextInput>:
+    font_size: '15dp'
+    on_text: root.update_padding()
+    padding_x: (self.width - self.text_width) / 2
+    size_hint_y:None
+    height:30
+    background_color: C('#0f192e')
+    cursor_color: C('#ffffff')
+    foreground_color: C('#ffffff')
+    canvas.after:
+        Color:
+            rgb: C('#0f192e')
+        Ellipse:
+            angle_start:180
+            angle_end:360
+            pos:(self.pos[0] - self.size[1]/2.0, self.pos[1])
+            size: (self.size[1], self.size[1])
+        Ellipse:
+            angle_start:0
+            angle_end:180
+            pos: (self.size[0] + self.pos[0] - self.size[1]/2.0, self.pos[1])
+            size: (self.size[1], self.size[1])
+        Color:
+            rgba: C('#3f92db')
+        Line:
+            points: self.pos[0] , self.pos[1], self.pos[0] + self.size[0], self.pos[1]
+        Line:
+            points: self.pos[0], self.pos[1] + self.size[1], self.pos[0] + self.size[0], self.pos[1] + self.size[1]
+        Line:
+            ellipse: self.pos[0] - self.size[1]/2.0, self.pos[1], self.size[1], self.size[1], 180, 360
+        Line:
+            ellipse: self.size[0] + self.pos[0] - self.size[1]/2.0, self.pos[1], self.size[1], self.size[1], 0, 180
+
+
+<ScreenManagement>:
+    LoginScreen:
+        id: login
+        name: 'login'
+    RapportScreen:
+        id: rapport
+        name: 'rapport'
+    ProgrammationScreen:
+        id: programmation
+        name: 'programmation'
+    GenerateContactScreen:
+        id: generationContact
+        name: 'generationContact'
+    DetectionScreen:
+        id: detectionSocialNetwork
+        name: 'detectionSocialNetwork'
+    RetweetScreen:
+        id: retweetLike
+        name: 'retweetLike'
+

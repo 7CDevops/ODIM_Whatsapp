@@ -1,0 +1,18 @@
+[title="Champ de recherche"]
+[class="_11JPr"]
+[class="g0rxnol2"]
+#action-button
+#fallback_block > div > div > h4:nth-child(2) > a
+[class="emrlamx0 aiput80m h1a80dm5 sta02ykp g0rxnol2 l7jjieqr hnx8ox4h f8jlpxt4 l1l4so3b le5p0ye3 m2gb0jvt rfxpxord gwd8mfxi mnh9o63b qmy7ya1v dcuuyf4k swfxs4et bgr8sfoe a6r886iw fx1ldmn8 orxa12fk bkifpc9x hjo1mxmu oixtjehm rpz5dbxo bn27j4ou snayiamo szmswy5k"]
+[title="Taper un message"]
+[data-icon="attach-menu-plus"]
+[accept="image/*,video/mp4,video/3gpp,video/quicktime"]
+[accept="*"]
+[data-icon="send"]
+[data-icon="msg-time"]
+[data-icon="msg-check"]
+[data-icon="msg-dblcheck"]
+[data-icon="error"]
+[class="CzM4m"]
+[class="n5hs2j7m oq31bsqd gx1rr48f qh5tioqs"]
+

@@ -1,0 +1,66 @@
+#define appName "ODIM"
+#define appVersion "2.0.0"
+#define exePath "..\source\ODIM.exe"
+#define exeName "ODIM.exe"
+
+[Setup]
+AppName={#appName}
+AppVersion={#appVersion}
+WizardStyle=modern
+DefaultDirName={autopf}\ODIM
+DefaultGroupName=ODIM
+;Désactivation de l'option pour ne demander qu'une fois le chemin d'installation de l'exécutable
+DisableDirPage=no
+;Nom du setup 
+OutputBaseFilename="ODIM_2.0.0_Setup"
+Compression=lzma2
+SolidCompression=yes
+;répertoire de génération du Setup
+OutputDir=..\output
+PrivilegesRequired = admin
+SetupIconFile=C:\Users\a.colas\Desktop\ODIM_V2\Setup\source\bombSetup.ico
+
+;Language de la fenêtre d'installation
+[Languages]
+Name:"french";MessagesFile:"compiler:Languages\French.isl"
+
+[Tasks]
+;Demande à l'utilisateur d'une création d'une icône sur le bureau 
+Name:"desktopicon";Description:"{cm:CreateDesktopIcon}";GroupDescription: "{cm:AdditionalIcons}";Flags:unchecked
+
+[Dirs]
+Name:"{app}\Configuration"
+Name:"{app}\Export"
+Name:"{app}\Extraction"
+Name:"{app}\LOG"
+Name:"{app}\Programmation"
+Name:"{app}\VCF"
+
+[Files]
+; copie de l'exe de python vers le sous répertoire pythonInstaller
+Source: "..\source\python-3.9.13-amd64.exe"; DestDir: "{app}\pythonInstaller"
+; copie de l'exe de Chrome vers le sous répertoire ChromeInstaller
+Source: "..\source\ChromeSetup.exe"; DestDir: "{app}\ChromeInstaller"
+; copie de l'exe de ODIM dans le répertoire de l'application
+Source: "..\source\FFMPEG\*"; DestDir: "{app}\FFMPEG"; Flags:recursesubdirs
+; copie de l'exe de ODIM dans le répertoire de l'application
+Source: "{#exePath}"; DestDir: "{app}"; AfterInstall:InstallExe
+
+[Icons]
+Name: "{commondesktop}\{#appName}"; Filename: "{app}\{#exeName}"
+
+
+[Code]
+{Méthode pour lancer l'installation de python et de Chrome}
+procedure InstallExe();
+
+var 
+  ResultCode:Integer;
+begin
+     {Installation de python}
+     ShellExec('runas',ExpandConstant('{app}\pythonInstaller\python-3.9.13-amd64.exe'),'','',SW_SHOW,ewWaitUntilTerminated, ResultCode);
+     {Installation du navigateur Chrome}
+     ShellExec('runas',ExpandConstant('{app}\ChromeInstaller\ChromeSetup.exe'),'','',SW_SHOW,ewWaitUntilTerminated, ResultCode);
+end;
+
+

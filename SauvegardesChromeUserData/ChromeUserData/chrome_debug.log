@@ -1,0 +1,11 @@
+[14104:9552:0817/114300.196:WARNING:chrome_main_delegate.cc(596)] This is Chrome version 116.0.5845.97 (not a warning)
+[14104:9552:0817/114300.315:INFO:chrome_browser_cloud_management_controller.cc(168)] Starting CBCM Controller Initialization
+[14104:9552:0817/114300.315:INFO:chrome_browser_cloud_management_controller.cc(196)] No machine level policy manager exists.
+[14104:9552:0817/114303.205:INFO:CONSOLE(0)] "Error with Permissions-Policy header: Unrecognized feature: 'ambient-light-sensor'.", source:  (0)
+[14104:4592:0817/114314.503:ERROR:indexed_db_metadata_coding.cc(201)] IndexedDB Consistency Error: GET_OBJECT_STORES
+[14104:4592:0817/114314.513:ERROR:indexed_db_metadata_coding.cc(201)] IndexedDB Consistency Error: GET_OBJECT_STORES
+[14104:4592:0817/114314.513:ERROR:indexed_db_metadata_coding.cc(201)] IndexedDB Consistency Error: GET_OBJECT_STORES
+[14104:4592:0817/114314.513:ERROR:indexed_db_metadata_coding.cc(201)] IndexedDB Consistency Error: GET_OBJECT_STORES
+[14104:4592:0817/114314.513:ERROR:indexed_db_metadata_coding.cc(201)] IndexedDB Consistency Error: GET_OBJECT_STORES
+[14104:4592:0817/114325.323:WARNING:page_discarding_helper.cc(129)] Discarding multiple pages with target (kb): 0
+[14104:9552:0817/114337.454:WARNING:pref_notifier_impl.cc(41)] Pref observer for media_router.cast_allow_all_ips found at shutdown.

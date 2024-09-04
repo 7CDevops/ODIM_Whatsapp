@@ -1,0 +1,14 @@
+5
+False
+1
+1
+False
+90
+120
+True
+
+False
+False
+False
+True
+False

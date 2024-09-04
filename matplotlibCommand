@@ -1,0 +1,8 @@
+
+pip install kivy
+pip install kivy-garden
+garden install matplotlib
+pip install matplotlib==3.2.2
+
+Si ça ne fonctionne pas :
+git clone https://github.com/kivy-garden/garden.matplotlib C:\odim-main\venv\Lib\site-packages\kivy\garden\matplotlib

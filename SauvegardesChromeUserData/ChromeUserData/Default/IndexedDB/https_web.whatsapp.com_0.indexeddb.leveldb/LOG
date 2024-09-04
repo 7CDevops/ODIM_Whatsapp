@@ -1,0 +1,18 @@
+2023/08/17-11:43:03.029 11f0 Reusing MANIFEST C:\Users\a.colas\PycharmProjects\odimFork\SauvegardesChromeUserData\ChromeUserData\Default\IndexedDB\https_web.whatsapp.com_0.indexeddb.leveldb/MANIFEST-000001
+2023/08/17-11:43:03.035 11f0 Recovering log #551
+2023/08/17-11:43:03.078 11f0 Reusing old log C:\Users\a.colas\PycharmProjects\odimFork\SauvegardesChromeUserData\ChromeUserData\Default\IndexedDB\https_web.whatsapp.com_0.indexeddb.leveldb/000551.log 
+2023/08/17-11:43:21.736 11f0 Level-0 table #559: started
+2023/08/17-11:43:21.896 11f0 Level-0 table #559: 1359507 bytes OK
+2023/08/17-11:43:21.901 11f0 Delete type=0 #551
+2023/08/17-11:43:21.916 11f0 Compacting 1@1 + 4@2 files
+2023/08/17-11:43:22.127 11f0 Generated table #560@1: 84973 keys, 2233957 bytes
+2023/08/17-11:43:22.426 11f0 Generated table #561@1: 95060 keys, 2309013 bytes
+2023/08/17-11:43:22.776 11f0 Generated table #562@1: 1065 keys, 3083724 bytes
+2023/08/17-11:43:22.896 11f0 Generated table #563@1: 23183 keys, 2099245 bytes
+2023/08/17-11:43:22.896 11f0 Compacted 1@1 + 4@2 files => 9725939 bytes
+2023/08/17-11:43:22.899 11f0 compacted to: files[ 0 0 4 0 0 0 0 ]
+2023/08/17-11:43:22.900 11f0 Delete type=2 #553
+2023/08/17-11:43:22.900 11f0 Delete type=2 #554
+2023/08/17-11:43:22.901 11f0 Delete type=2 #555
+2023/08/17-11:43:22.901 11f0 Delete type=2 #556
+2023/08/17-11:43:22.901 11f0 Delete type=2 #559

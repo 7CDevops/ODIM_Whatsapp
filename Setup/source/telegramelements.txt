@@ -1,0 +1,11 @@
+.tgme_action_button_label
+.input-field-input
+.sidebar-left-section-content
+.input-message-input
+.bubble.is-out.is-sending
+.bubble.is-out.is-sent
+.bubble.is-out.is-read
+div.btn-icon.btn-menu-toggle.attach-file.tgico-attach
+div.btn-menu-item.rp-overflow.tgico-image
+div.btn-menu-item.rp-overflow.tgico-document
+body > div.popup.popup-send-photo.popup-new-media.active > div > div.popup-input-container > button
